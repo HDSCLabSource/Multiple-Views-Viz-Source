@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <link type="text/css" rel="Stylesheet" href=".\bower_components\jqwidgets\jqwidgets\styles\jqx.base.css" />
+    <script type="text/javascript" src=".\bower_components\jquery\dist\jquery.min.js"></script>
+
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxcore.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxbuttons.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxfileupload.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxlayout.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxribbon.js"></script>
+
+
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxwindow.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxdocking.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxscrollbar.js"></script>
+
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxcheckbox.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxpanel.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxlistbox.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxdropdownlist.js"></script>
+    <script type="text/javascript" src=".\bower_components\jqwidgets\jqwidgets\jqxslider.js"></script>
+
+
+
+   <!--// <script type="text/javascript" src="../../scripts/demos.js"></script>-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#jqxFileUpload').jqxFileUpload({browseTemplate: 'success', uploadTemplate: 'primary',  cancelTemplate: 'danger', width: 300, uploadUrl: 'file:///C:/Users/Arunkumar/myapp/index.html', fileInputName: 'fileToUpload' });
+
+        });
+
+
+
+        $(document).ready(function () {
+            // the 'layout' JSON array defines the internal structure of the layout
+            var layout = [{
+                type: 'layoutGroup',
+                orientation: 'vertical',
+                width: '100%',height: '100%',
+                items: [{
+                    type: 'layoutGroup',
+                    orientation: 'vertical',
+                    width: '100%',height: '100%',
+                    items: [{
+                        type: 'documentGroup',
+                        height: '100%',
+                        minHeight: '100%',
+                        items: [{
+                            type: 'documentPanel',
+                            title: 'FileUpload',
+                            contentContainer: 'Document1Panel'
+                        }, {
+                            type: 'documentPanel',
+                            title: 'Column',
+                            contentContainer: 'Document2Panel'
+                        }, {
+                            type: 'documentPanel',
+                            title: 'Line',
+                            contentContainer: 'Document3Panel'
+                        }, {
+                            type: 'documentPanel',
+                            title: 'Grid',
+                            contentContainer: 'Document4Panel'
+                        }]
+                    }]
+                }/*, {
+                    type: 'tabbedGroup',
+                    width: '40%',
+                    items: [{
+                        type: 'layoutPanel',
+                        title: 'Solution Explorer',
+                        contentContainer: 'SolutionExplorerPanel'
+                    }, {
+                        type: 'layoutPanel',
+                        title: 'Properties',
+                        contentContainer: 'PropertiesPanel'
+                    }]
+                }*/]
+            }];
+            $('#jqxLayout').jqxLayout({ width: '900', height: '600', layout: layout });
+            $('#Document2Panel').ready(function () {
+                $('#docking').jqxDocking({  orientation: 'horizontal', width: 450, mode: 'default', windowsMode: { window0: 'floating'} });
+                $('#docking').jqxDocking('setWindowPosition', 'window0', 100, 100);
+                $('#docking').jqxDocking('pinWindow', 'window1');
+                $('#docking').jqxDocking('showAllCloseButtons');
+                $('#docking').jqxDocking('showAllCollapseButtons');
+
+
+                $('#movebutton').on('click', function () {
+                    $('#docking').jqxDocking('move', "window0", 0, 1);
+                });
+                $('#collapsebutton').on('click', function () {
+                    $('#docking').jqxDocking('collapseWindow', "window0");
+                });
+                $('#expandbutton').on('click', function () {
+                    $('#docking').jqxDocking('expandWindow', "window0");
+                });
+                $("#slider").jqxSlider({ width: 200, mode: 'fixed', value: 5, ticksFrequency: 1,  max: 9 });
+                $("#slider").on('change', function (event) {
+                    $("#docking").jqxDocking({ windowsOffset: event.args.value });
+                });
+            });
+
+            $('#Document3Panel').ready(function () {
+                $('#docking1').jqxDocking({  orientation: 'horizontal', width: 450, mode: 'default', windowsMode: { window1: 'floating'} });
+                $('#docking1').jqxDocking('setWindowPosition', 'window1', 100, 100);
+                $('#docking1').jqxDocking('pinWindow', 'window1');
+
+
+
+
+                $('#docking1').jqxDocking('showAllCloseButtons');
+                $('#docking1').jqxDocking('showAllCollapseButtons');
+
+
+
+
+
+
+
+                $('#movebutton').on('click', function () {
+                    $('#docking1').jqxDocking('move', "window1", 0, 1);
+                });
+                $('#collapsebutton').on('click', function () {
+                    $('#docking1').jqxDocking('collapseWindow', "window1");
+                });
+                $('#expandbutton').on('click', function () {
+                    $('#docking1').jqxDocking('expandWindow', "window1");
+                });
+                $("#slider1").jqxSlider({ width: 200, mode: 'fixed', value: 5, ticksFrequency: 1,  max: 9 });
+                $("#slider1").on('change', function (event) {
+                    $("#docking1").jqxDocking({ windowsOffset: event.args.value });
+                });
+            });
+
+
+        });
+
+        function myFunction() {
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "file");
+            document.body.appendChild(x);
+        }
+
+
+    </script>
+
+</head>
+<body>     
+
+
+    <div id="jqxLayout">
+        <!--The panel content divs can have a flat structure-->
+        <!--documentGroup-->
+
+        <script src="loader.js"></script>
+        <form>
+        <div data-container="Document1Panel">
+
+            Upload your Fitness data
+            <div id="jqxFileUpload" onclick="myFunction()">
+
+                <script>
+                    function myFunction() {
+                        var x = document.createElement("INPUT");
+                        x.setAttribute("type", "file");
+                        document.body.appendChild(x);
+                    }
+                </script>
+            </div>
+        </div>
+            </form>
+
+
+        <form>
+
+
+
+            <div data-container="Document2Panel" >
+                <div id='Document2Panel.jqxWidget'>
+                    <div id="docking">
+                        <div id="panel0">
+                            <div id="window0" style="height: 400px; width: 500px;">
+                                <div>
+                                    Column</div>
+                                <div>
+                                    <div class="chart">
+
+                                    </div>
+
+                                    <link href="C:/Users/Arunkumar/Eclipse-workspace/Visualization/src/c3.css" rel="stylesheet" type="text/css">
+                                    <script src="http://d3js.org/d3.v3.min.js"></script>
+                                    <script src="C:/Users/Arunkumar/Eclipse-workspace/Visualization/src/c3.min.js"></script>
+
+                                    <div class="content">
+                                        <div id="slider"></div>
+
+                                        <div id="chart-area"></div>
+                                    </div>
+
+                                    <script>
+                                        // Line Chart
+                                        /*  var chart = c3.generate({
+                                         data: {
+                                         columns: [
+                                         ['CaloriesIn',900,1000, 1200, 1400, 800, 1500, 200],
+                                         ['CaloriesOut',400,800, 1400, 1000, 1100, 1000, 2500]
+                                         ],
+                                         //type: 'bar'
+                                         },
+                                         axis: {
+                                         x: {
+                                         type: 'category',
+                                         categories: ['Mon', 'Tues', 'Wedns', 'Thurs', 'Fri', 'Sat', 'Sun']
+                                         }
+                                         }
+                                         });
+                                         setTimeout(function () {
+                                         chart.load({
+                                         columns: [
+                                         ['Difference: CalorieIn-CalorieOut', 1000,200, 450, 700, 600, 500]
+                                         ]
+                                         });
+                                         }, 1000);
+                                         */
+
+
+                                        var chart = c3.generate({
+                                            data: {
+
+                                                columns: [
+                                                    ['Running',53055,35370, 44212, 53055, 54823, 76045, 49518],
+                                                    ['Walking',88669,66501, 48768, 55418, 57634, 44334, 50984]
+
+                                                ],
+                                                type: 'bar'/* ,
+                                                 onmouseover: function (d, i) { myFunction(d, i);},
+                                                 onclick: function (d, i) { console.log("onclick", d, i); },
+                                                 onmouseout: function (d, i) { console.log("onmouseout", d, i); } */
+
+                                            },
+
+                                            axis: {
+                                                x: {
+                                                    type: 'category',
+                                                    categories: [ 'Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'July'],
+                                                    label: 'Month'
+                                                },
+
+                                                y: {
+                                                    label: 'Number Of Steps'
+                                                }
+                                            },
+                                            grid: {
+                                                y: {
+                                                    lines: [{value:0}]
+                                                }
+                                            },
+                                            zoom: {
+                                                enabled: true
+                                            }
+                                        });
+
+                                        setTimeout(function () {
+                                            chart.groups([['data1', 'data2', 'data3']])
+                                        }, 1000);
+
+
+
+                                        setTimeout(function () {
+                                            chart.groups([['data1', 'data2', 'data3']])
+                                        }, 2000);
+
+                                        function myFunction(d, i) {
+                                            var chart = c3.generate({
+                                                data: {
+                                                    // iris data from R
+                                                    columns: [
+                                                        ["CaloriesIn", 2000]
+
+                                                    ],
+                                                    type : 'line',
+                                                    onclick: function (d, i) { console.log("onclick", d, i); },
+                                                    onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                                                    onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+                                                }
+                                            });
+
+                                        }
+
+
+
+                                    </script>
+                                </div>
+                            </div>
+
+                            <div>
+                            </div>
+                            <div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div style="float: left; margin-top: 30px;">
+
+                        <table style="margin-left: 20px; margin-top: 20px; margin-bottom: 30px;">
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+        <form>
+
+
+
+        <div data-container="Document3Panel" >
+            <div id='Document3Panel.jqxWidget'>
+                <div id="docking1">
+                    <div id="panel1">
+                        <div id="window1" style="height: 400px; width: 500px;">
+                            <div>
+                                jqxDock3</div>
+                            <div>
+                                You can drag and drop this object.</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="float: left; margin-top: 30px;">
+
+                    <table style="margin-left: 20px; margin-top: 20px; margin-bottom: 30px;">
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+            </form>
+    </div>
+    <br />
+</body>
+</html>
+
